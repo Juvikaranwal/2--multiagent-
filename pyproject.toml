@@ -1,0 +1,102 @@
+[tool.poetry]
+name = "neurology-research-agent"
+version = "0.1.0"
+description = "Advanced Multi-Agent LLM System for Neurobiology Research"
+authors = ["juvi"]
+readme = "README.md"
+packages = [{include = "neurology_agent"}]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+# Core LLM and AI Libraries
+langchain = "^0.2.0"
+langchain-core = "^0.2.0"
+langchain-openai = "^0.1.0"
+langchain-community = "^0.2.0"
+
+# Vector Storage and Embedding
+chromadb = "^0.4.0"
+sentence-transformers = "^2.6.0"
+faiss-cpu = "^1.7.4"
+
+# Document Processing
+pypdf = "^4.0.0"
+python-dotenv = "^1.0.0"
+
+# Data Handling
+numpy = "^1.24.0"
+pandas = "^2.0.0"
+
+# Async and Networking
+httpx = "^0.25.0"
+aiohttp = "^3.9.0"
+
+# Scientific Computing
+scipy = "^1.10.0"
+scikit-learn = "^1.2.0"
+
+# Logging and Monitoring
+structlog = "^23.1.0"
+opentelemetry-api = "^1.20.0"
+
+# Optional: Advanced NLP
+spacy = "^3.5.0"
+nltk = "^3.8.0"
+
+[tool.poetry.group.dev.dependencies]
+# Development and Testing Tools
+pytest = "^7.3.0"
+pytest-cov = "^4.0.0"
+mypy = "^1.3.0"
+ruff = "^0.0.272"
+black = "^23.3.0"
+isort = "^5.12.0"
+
+# Jupyter for interactive development
+jupyter = "^1.0.0"
+ipykernel = "^6.22.0"
+
+[tool.ruff]
+# Ruff configuration for code quality
+line-length = 120
+select = ["E", "F", "W", "I", "N", "UP", "PL", "RUF"]
+ignore = ["E501"]
+
+[tool.black]
+line-length = 120
+target-version = ['py39']
+
+[tool.isort]
+profile = "black"
+line_length = 120
+
+[tool.mypy]
+ignore_missing_imports = true
+check_untyped_defs = true
+disallow_any_generics = true
+strict_optional = true
+
+[tool.poetry.scripts]
+# Define CLI entry points
+neurobiology-agent = "neurobiology_agent.main:main"
+research-query = "neurobiology_agent.cli:run_query"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+# Specific configuration for the neurobiology research agent
+[tool.neurobiology-agent]
+default_model = "gpt-4-turbo"
+embedding_model = "text-embedding-ada-002"
+max_context_tokens = 4096
+research_domains = [
+    "Neuroplasticity",
+    "Synaptic Transmission",
+    "Neurodegenerative Diseases"
+]
+
+# Logging configuration
+[tool.logging]
+level = "INFO"
+format = "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
